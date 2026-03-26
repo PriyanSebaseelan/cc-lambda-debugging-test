@@ -30,9 +30,25 @@ def lambda_handler(event, context=None):
             'statusCode': 400,
             'body': json.dumps('Error: word field does not exist')
         }
-    
+
+    nato_map = {
+        "a": "Alpha",
+        "e": "Echo",
+        "i": "India",
+        "o": "Oscar",
+        "u": "Uniform",
+        "y": "Yankee"
+    }
+
+    result = []
     for char in word:
-        res.append(char)
+        lower_char = char.lower()
+        if lower_char in nato_map:
+            result.append(nato_map[lower_char])
+        else:
+            result.append(char)
+
+    res = "".join(result)
 
     return {
         'statusCode': 200,
